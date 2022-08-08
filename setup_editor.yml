@@ -63,11 +63,18 @@
         src: "{{ item['value']['file'] }}"
         dest: "{{ item['value']['dest'] }}"
 
-    - name: Ensure simpler variables are defined
+    - name: Ensure ~/.bashrc is configured 
       blockinfile:
         path: ~/.bashrc
         block: |
+          # Set editor for oc commands
+
           export EDITOR=/usr/bin/vim
+
+          # Source variables on new shell
+          source /usr/local/etc/ocp4.config
+
+          # Set simpler variables
           M=$RHT_OCP4_MASTER_API
           WC=$RHT_OCP4_WILDCARD_DOMAIN
           NS=$RHT_OCP4_NEXUS_SERVER
