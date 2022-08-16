@@ -72,7 +72,11 @@
           export EDITOR=/usr/bin/vim
 
           # Source variables on new shell
-          source /usr/local/etc/ocp4.config
+          if [ -e /usr/local/etc/ocp4.config ]; then source /usr/local/etc/ocp4.config; fi
+
+          # Set login aliases
+          alias lcl="oc login -u admin -p redhat https://api.ocp4.example.com:6443"
+          alias mcl="oc login -u admin -p redhat https://api.ocp4-mng.example.com:6443"
 
           # Set simpler variables
           M=$RHT_OCP4_MASTER_API
@@ -88,4 +92,7 @@
         msg: | 
 
           🥳    🥳    🥳    🥳 
+
           Please run source ~/.bashrc
+
+          🥳    🥳    🥳    🥳 
