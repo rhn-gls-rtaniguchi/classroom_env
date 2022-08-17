@@ -3,7 +3,7 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
-autocmd FileType yaml setlocal ai et sw=2 ts=2 sts=2 nu cuc
+autocmd FileType yaml setlocal ai et sw=2 ts=2 sts=2 nu cuc paste
 
 set foldlevelstart=20
 
