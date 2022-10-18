@@ -32,7 +32,7 @@
       dnf:
         name:
           - git
-        state: latest
+        state: installed
 
     - name: Ensure needed python packages are installed
       pip:
@@ -63,12 +63,11 @@
         src: "{{ item['value']['file'] }}"
         dest: "{{ item['value']['dest'] }}"
 
-    - name: Ensure ~/.bashrc is configured 
+    - name: Ensure ~/.bashrc is configured
       blockinfile:
         path: ~/.bashrc
         block: |
           # Set editor for oc commands
-
           export EDITOR=/usr/bin/vim
 
           # Source variables on new shell
@@ -87,9 +86,26 @@
           G=$RHT_OCP4_GITHUB_USER
           Q=$RHT_OCP4_QUAY_USER
 
+    - name: Ensure resolution is configured
+      copy:
+        src: monitors.xml
+        dest: ~/.config
+
+    - name: Ensure terminal starts maximized
+      copy:
+        src: org.gnome.Terminal.desktop
+        dest: ~/.local/share/applications/org.gnome.Terminal.desktop
+
+    - name: Ensure resolution is set
+      command: xrandr --size 1920x1080
+
+    - name: Ensure terminal terminates
+      command: |
+        killall gnome-terminal-server
+
     - name: Finish message
-      debug: 
-        msg: | 
+      debug:
+        msg: |
 
           🥳    🥳    🥳    🥳 
 
