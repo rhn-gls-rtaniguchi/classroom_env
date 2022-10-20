@@ -70,6 +70,9 @@
           # Set editor for oc commands
           export EDITOR=/usr/bin/vim
 
+          # Set bash history timestamps
+          export HISTTIMEFORMAT="%F %T "
+
           # Source variables on new shell
           if [ -e /usr/local/etc/ocp4.config ]; then source /usr/local/etc/ocp4.config; fi
 
@@ -102,13 +105,3 @@
     - name: Ensure terminal terminates
       command: |
         killall gnome-terminal-server
-
-    - name: Finish message
-      debug:
-        msg: |
-
-          🥳    🥳    🥳    🥳 
-
-          Please run source ~/.bashrc
-
-          🥳    🥳    🥳    🥳 
