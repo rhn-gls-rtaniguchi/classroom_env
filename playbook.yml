@@ -70,8 +70,14 @@
           # Set editor for oc commands
           export EDITOR=/usr/bin/vim
 
+          # Set bash history size
+          export HISTSIZE=10000
+
           # Set bash history timestamps
           export HISTTIMEFORMAT="%F %T "
+
+          # Append to .bash_history
+          PROMPT_COMMAND="$PROMPT_COMMAND; history -a; history -n"
 
           # Source variables on new shell
           if [ -e /usr/local/etc/ocp4.config ]; then source /usr/local/etc/ocp4.config; fi
@@ -88,6 +94,12 @@
           P=$RHT_OCP4_DEV_PASSWORD
           G=$RHT_OCP4_GITHUB_USER
           Q=$RHT_OCP4_QUAY_USER
+
+          # Git bash
+          source /usr/share/git-core/contrib/completion/git-prompt.sh
+          export GIT_PS1_SHOWDIRTYSTATE=true
+          export GIT_PS1_SHOWUNTRACKEDFILES=true
+          export PS1='[\u@\h \W$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\$ '
 
     - name: Ensure resolution is configured
       copy:
