@@ -3,36 +3,10 @@
   become: false
   gather_facts: false
 
-  vars:
-
-    dir_list:
-      - ~/.vim/autoload
-      - ~/.vim/bundle
-      - ~/.config/yamllint
-
-    repo_list:
-      - https://github.com/Yggdroot/indentLine.git
-      - https://github.com/pedrohdz/vim-yaml-folds.git
-      - https://github.com/dense-analysis/ale.git
-
-    config_files:
-      vim:
-        file: vimrc
-        dest: ~/.vimrc
-
-      yamllint:
-        file: config
-        dest: ~/.config/yamllint/config
+  vars_files:
+    - vars.yml
 
   tasks:
-
-    - name: Ensure needed rpm packages are installed
-      become: true
-      ignore_errors: true
-      dnf:
-        name:
-          - git
-        state: installed
 
     - name: Ensure needed python packages are installed
       pip:
@@ -76,6 +50,9 @@
           # Set bash history timestamps
           export HISTTIMEFORMAT="%F %T "
 
+          # Set pager not to clear on exit
+          export LESS='-X'
+
           # Append to .bash_history
           PROMPT_COMMAND="$PROMPT_COMMAND; history -a; history -n"
 
@@ -103,16 +80,6 @@
           export GIT_PS1_SHOWDIRTYSTATE=true
           export GIT_PS1_SHOWUNTRACKEDFILES=true
           export PS1='[\u@\h \W$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\$ '
-
-    - name: Ensure resolution is configured
-      copy:
-        src: monitors.xml
-        dest: ~/.config
-
-    - name: Ensure terminal starts maximized
-      copy:
-        src: org.gnome.Terminal.desktop
-        dest: ~/.local/share/applications/org.gnome.Terminal.desktop
 
     - name: Ensure resolution is set
       command: xrandr --size 1920x1080
