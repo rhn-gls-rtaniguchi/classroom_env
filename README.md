@@ -7,10 +7,10 @@
 Requires Ansible to be installed.
 
 ```
-git clone https://gitlab.com/rgdacosta/vim-yaml.git
+git clone https://gitlab.com/rgdacosta/ocp_dev.git
 
-cd vim-yaml
+cd ocp_dev
 
-ansible-playbook setup_editor.yml
+ansible-playbook playbook.yml
 ```
 
