@@ -79,6 +79,9 @@
           # Append to .bash_history
           PROMPT_COMMAND="$PROMPT_COMMAND; history -a; history -n"
 
+          # Set pager to not clear on exit
+          export LESS='-X'
+
           # Source variables on new shell
           if [ -e /usr/local/etc/ocp4.config ]; then source /usr/local/etc/ocp4.config; fi
 
