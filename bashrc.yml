@@ -18,11 +18,11 @@ my_bashrc: |
   # Source variables on new shell
   if [ -e /usr/local/etc/ocp4.config ]; then source /usr/local/etc/ocp4.config; fi
 
-  # Set login aliases
+  # Set login aliases for OCP classes
   alias lcl="oc login -u admin -p redhat https://api.ocp4.example.com:6443"
   alias mcl="oc login -u admin -p redhat https://api.ocp4-mng.example.com:6443"
 
-  # Set simpler variables
+  # Set simpler variables for OCP classes
   M=$RHT_OCP4_MASTER_API
   WC=$RHT_OCP4_WILDCARD_DOMAIN
   NS=$RHT_OCP4_NEXUS_SERVER
@@ -36,3 +36,12 @@ my_bashrc: |
   export GIT_PS1_SHOWDIRTYSTATE=true
   export GIT_PS1_SHOWUNTRACKEDFILES=true
   export PS1='[\u@\h \W$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\$ '
+
+  # Ansible aliases
+  alias ap="ansible-playbook"
+  alias apsc="ansible-playbook --syntax-check"
+  alias acd="ansible-config dump"
+  alias av="ansible --version"
+
+  # pastebin
+  alias pastebin="curl -F 'sprunge=<-' http://sprunge.us"
