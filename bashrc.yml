@@ -37,11 +37,17 @@ my_bashrc: |
   export GIT_PS1_SHOWUNTRACKEDFILES=true
   export PS1='[\u@\h \W$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\$ '
 
-  # Ansible aliases
+  # Ansible aliases (ansible-core)
   alias ap="ansible-playbook"
   alias apsc="ansible-playbook --syntax-check"
   alias acd="ansible-config dump"
   alias av="ansible --version"
+
+   # Ansible aliases (ansible-navigator)
+  alias anr="ansible-navigator run -m stdout"
+  alias ansc="ansible-navigator run -m stdout --syntax-check"
+  alias ancd="ansible-navigator config dump -m stdout"
+  alias anv="ansible-navigator --version"
 
   # pastebin
   alias pastebin="curl -F 'sprunge=<-' http://sprunge.us"
