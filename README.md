@@ -7,9 +7,9 @@
 Requires Ansible to be installed.
 
 ```
-git clone https://gitlab.com/rgdacosta/ocp_dev.git
+git clone https://gitlab.com/rgdacosta/classroom_env.git
 
-cd ocp_dev
+cd classroom_env
 
 ansible-playbook playbook.yml
 ```
