@@ -10,42 +10,51 @@
   tasks:
 
     - name: Ensure needed python packages are installed
-      pip:
+      ansible.builtin.pip:
         name: yamllint
         state: present
         extra_args: --user
 
     - name: Ensure needed directories are present
       loop: "{{ dir_list }}"
-      file:
+      ansible.builtin.file:
         path: "{{ item }}"
         state: directory
 
     - name: Ensure pathogen is downloaded
-      get_url:
+      ansible.builtin.get_url:
         url: https://tpo.pe/pathogen.vim
         dest: ~/.vim/autoload/pathogen.vim
 
     - name: Ensure plugin repos are cloned
       loop: "{{ repo_list }}"
-      git:
+      ansible.builtin.git:
         repo: "{{ item }}"
         dest: ~/.vim/bundle/{{ item.split('/')[-1] | regex_replace('\.git$') }}
 
     - name: Ensure config files are copied
       loop: "{{ lookup('dict', config_files) }}"
-      copy:
+      notify: Ensure terminal terminates
+      ansible.builtin.copy:
         src: "{{ item['value']['file'] }}"
         dest: "{{ item['value']['dest'] }}"
 
     - name: Ensure ~/.bashrc is configured
-      blockinfile:
+      ansible.builtin.blockinfile:
         path: ~/.bashrc
         block: "{{ my_bashrc }}"
+
+    - name: Ensure resolution is obtained
+      register: current_resolution
+      ansible.builtin.command: xrandr
           
     - name: Ensure resolution is set
-      command: xrandr --size 1920x1080
+      when: '1920x1080' not in current_resolution
+      ansible.builtin.command: xrandr --size 1920x1080
+
+
+  handlers:
 
     - name: Ensure terminal terminates
-      command: |
+      ansible.builtin.command: |
         killall gnome-terminal-server
