@@ -49,7 +49,7 @@
       ansible.builtin.command: xrandr
           
     - name: Ensure resolution is set
-      when: '1920x1080' not in current_resolution.stdout
+      when: "'1920x1080' not in current_resolution.stdout_lines"
       ansible.builtin.command: xrandr --size 1920x1080
 
 
