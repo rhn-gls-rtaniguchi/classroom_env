@@ -52,9 +52,34 @@
       when: "'1920x1080' not in current_resolution.stdout_lines"
       ansible.builtin.command: xrandr --size 1920x1080
 
+    - name: Render terminal profile template
+      notify: Ensure dconf loads terminal profile
+      ansible.general.template:
+        src: terminal_profile.j2
+        dest: /var/tmp/terminal_profile
+        mode: 0644
+
 
   handlers:
 
     - name: Ensure terminal terminates
       ansible.builtin.command: |
         killall gnome-terminal-server
+
+    - name: Ensure terminal profile is slurped
+      listen: Ensure dconf loads terminal profile
+      register: terminal_profile
+      ansible.builtin.slurp:
+        src: /var/tmp/terminal_profile
+
+    - name: debug
+      listen: Ensure dconf loads terminal profile
+      debug:
+        var: terminal_profile
+
+    - name: Ensure profile is loaded
+      listen: Ensure dconf loads terminal profile
+      community.general.system.dconf:
+        key: /org/gnome/terminal/
+        value: "{{ terminal_profile.stdout }}"
+        state: present

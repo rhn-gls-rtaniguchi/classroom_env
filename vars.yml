@@ -28,3 +28,6 @@ config_files:
   terminal:
     file: org.gnome.Terminal.desktop
     dest: ~/.local/share/applications/org.gnome.Terminal.desktop
+
+regularfont_uuid: "{{ 99999999 | random | to_uuid }}"
+biggerfont_uuid: "{{ 99999999 | random | to_uuid }}"
