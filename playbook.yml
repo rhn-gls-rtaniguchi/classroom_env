@@ -32,6 +32,13 @@
         repo: "{{ item }}"
         dest: ~/.vim/bundle/{{ item.split('/')[-1] | regex_replace('\.git$') }}
 
+    - name: Render terminal profile template
+      notify: Ensure profile is loaded
+      ansible.builtin.template:
+        src: terminal_profile.j2
+        dest: /var/tmp/terminal_profile
+        mode: 0644
+
     - name: Ensure config files are copied
       loop: "{{ lookup('dict', config_files) }}"
       notify: Ensure terminal terminates
@@ -48,38 +55,16 @@
       register: current_resolution
       changed_when: false
       ansible.builtin.command: xrandr
-          
-    - name: Ensure resolution is set
-      when: "'1920 x 1080' not in current_resolution.stdout_lines"
-      ansible.builtin.command: xrandr --size 1920x1080
 
-    - name: Render terminal profile template
-      notify: Ensure dconf loads terminal profile
-      ansible.builtin.template:
-        src: terminal_profile.j2
-        dest: /var/tmp/terminal_profile
-        mode: 0644
+    - name: Ensure resolution is set
+      when: "'1920 x 1080' not in current_resolution.stdout"
+      ansible.builtin.command: xrandr --size 1920x1080
 
   handlers:
 
-    - name: Ensure terminal terminates
-      ansible.builtin.command: |
-        killall gnome-terminal-server
-
-    - name: Ensure terminal profile is slurped
-      listen: Ensure dconf loads terminal profile
-      register: terminal_profile
-      ansible.builtin.slurp:
-        src: /var/tmp/terminal_profile
-
-    - name: debug
-      listen: Ensure dconf loads terminal profile
-      debug:
-        var: terminal_profile
-
+# community.general.dconf was considered but did not behave as expected
     - name: Ensure profile is loaded
-      listen: Ensure dconf loads terminal profile
-      community.general.dconf:
-        key: /org/gnome/terminal/
-        value: "{{ terminal_profile.stdout }}"
-        state: present
+      ansible.builtin.shell: dconf load /org/gnome/terminal/ < /var/tmp/terminal_profile
+
+    - name: Ensure terminal terminates
+      ansible.builtin.command: killall gnome-terminal-server

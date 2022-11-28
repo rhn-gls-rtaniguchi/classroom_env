@@ -59,6 +59,7 @@ my_bashrc: |
   alias apsc="ansible-playbook --syntax-check"
   alias acd="ansible-config dump"
   alias av="ansible --version"
+  alias aig="ansible-inventory --graph"
 
   # =====================================
   # Ansible aliases (ansible-navigator)
@@ -68,6 +69,7 @@ my_bashrc: |
   alias ansc="ansible-navigator run -m stdout --syntax-check"
   alias ancd="ansible-navigator config dump -m stdout"
   alias anv="ansible-navigator --version"
+  alias anig="ansible-navigator inventory --graph"
 
   # ============
   # Git aliases
