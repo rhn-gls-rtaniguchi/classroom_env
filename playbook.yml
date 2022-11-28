@@ -54,7 +54,7 @@
 
     - name: Render terminal profile template
       notify: Ensure dconf loads terminal profile
-      ansible.general.template:
+      ansible.builtin.template:
         src: terminal_profile.j2
         dest: /var/tmp/terminal_profile
         mode: 0644
@@ -79,7 +79,7 @@
 
     - name: Ensure profile is loaded
       listen: Ensure dconf loads terminal profile
-      community.general.system.dconf:
+      community.general.dconf:
         key: /org/gnome/terminal/
         value: "{{ terminal_profile.stdout }}"
         state: present
