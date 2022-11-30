@@ -29,5 +29,5 @@ config_files:
     file: org.gnome.Terminal.desktop
     dest: ~/.local/share/applications/org.gnome.Terminal.desktop
 
-regularfont_uuid: 5552A957-D588-4D0A-9DCD-735502C144E5 
+regularfont_uuid: 5552A957-D588-4D0A-9DCD-735502C144E5
 biggerfont_uuid: 3B334A84-2F7F-485A-8456-1DD35E3191CD
