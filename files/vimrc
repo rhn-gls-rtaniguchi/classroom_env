@@ -11,6 +11,18 @@ set mouse=a
 
 set nu
 
+" replace tabs with spaces in YAML files
+let @r = ':%retab|'
+
+" enable paste mode
+let @p = ':set paste'
+
+" disable paste mode
+let @n = ':set nopaste'
+
+" remove trailing spaces
+let @t = ':%s/\s\+$//e'
+
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
