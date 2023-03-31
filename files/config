@@ -2,3 +2,6 @@ extends: relaxed
 
 rules:
   line-length: disable
+
+  empty-lines:
+    max-end: 2
