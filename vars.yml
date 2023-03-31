@@ -13,6 +13,10 @@ config_files:
     file: vimrc
     dest: ~/.vimrc
 
+  nano:
+    file: nanorc
+    dest: ~/.nanorc
+
   yamllint:
     file: config
     dest: ~/.config/yamllint/config
