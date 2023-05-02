@@ -1,2 +1,3 @@
-playbook.log
-output.log
+*.log
+*-artifact-*
+.*.swp
