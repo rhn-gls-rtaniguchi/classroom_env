@@ -3,11 +3,12 @@
   become: false
   gather_facts: false
 
-  vars_files:
-    - vars.yml
-    - bashrc.yml
-
   tasks:
+
+    - name: Determine course type
+      register: course_info
+      ansible.builtin.slurp:
+        src: /etc/rht
 
     - name: Ensure needed python packages are installed
       ansible.builtin.pip:
@@ -50,6 +51,13 @@
       ansible.builtin.blockinfile:
         path: ~/.bashrc
         block: "{{ my_bashrc }}"
+        state: present
+
+    - name: Remove ~/.ansible-navigator.yml
+      when: ("'do374' in course_info['content'] | b64decode") or ("'rh294' in course_info['content'] | b64decode")
+      ansible.builtin.file:
+        path: ~/.ansible-navigator.yml
+        state: absent
 
     - name: Ensure resolution is obtained
       register: current_resolution
