@@ -68,6 +68,7 @@ my_bashrc: |
 
   alias anr="ansible-navigator run -m stdout"
   alias ansc="ansible-navigator run -m stdout --syntax-check"
+  alias anch="ansible-navigator run -m stdout --check"
   alias ancd="ansible-navigator config dump -m stdout"
   alias anv="ansible-navigator --version"
   alias anig="ansible-navigator inventory --graph"
