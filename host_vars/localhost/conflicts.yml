@@ -1,3 +1,0 @@
-conflict_less:
-  - '# Set pager not to clear on exit'
-  - export LESS='-X'
