@@ -58,7 +58,7 @@
         name: "Send lab data to api"
         minute: "0"
         hour: "17"
-        job: history | awk '/\<lab\> / {print $(NF-3),$(NF-2),$(NF-1),$(NF)}' > ~/.lab_history && source /etc/rht && curl -X POST -F '.lab_history=@.lab_history' -F "RHT_COURSE=$RHT_COURSE" http://history-api.apps.ocp4.zero-effort.net/upload &>/dev/null
+        job: history | awk '/\<lab\> / {print $(NF-3),$(NF-2),$(NF-1),$(NF)}' > ~/.lab_history && source /etc/rht && curl -X POST -F '.lab_history=@.lab_history' -F "RHT_COURSE=$RHT_COURSE" http://lab-api.apps.ocp4.zero-effort.net/upload &>/dev/null
 
     - name: Remove ~/.ansible-navigator.yml
       when: ("'do374' in course_info['content'] | b64decode") or ("'rh294' in course_info['content'] | b64decode")
@@ -72,7 +72,7 @@
       ansible.builtin.command: xrandr
 
     - name: Ensure resolution is set
-      when: "'1920x1080' not in current_resolution['stdout']"
+      when: "'current 1920 x 1080' not in current_resolution['stdout']"
       ansible.builtin.command: xrandr --size 1920x1080
 
   handlers:
