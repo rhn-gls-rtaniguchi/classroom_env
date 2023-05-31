@@ -47,21 +47,30 @@
         src: "{{ item['value']['file'] }}"
         dest: "{{ item['value']['dest'] }}"
 
+    - name: Ensure other file types are copied
+      loop: "{{ lookup('dict', other_files) }}"
+      ansible.builtin.copy:
+        src: "{{ item['value']['file'] }}"
+        dest: "{{ item['value']['dest'] }}"
+        mode: "{{ item['value']['permissions'] | default(omit) }}"
+
     - name: Ensure ~/.bashrc is configured
       ansible.builtin.blockinfile:
         path: ~/.bashrc
         block: "{{ my_bashrc }}"
         state: present
 
-    - name: Ensure lab data cronjob is enabled
+    - name: Ensure lab timings cronjob is enabled
       ansible.builtin.cron:
         name: "Send lab data to api"
         minute: "0"
         hour: "17"
-        job: history | awk '/\<lab\> / {print $(NF-3),$(NF-2),$(NF-1),$(NF)}' > ~/.lab_history && source /etc/rht && curl -X POST -F '.lab_history=@.lab_history' -F "RHT_COURSE=$RHT_COURSE" http://lab-api.apps.ocp4.zero-effort.net/upload &>/dev/null
+        job: ~/bin/upload_timings 
 
     - name: Remove ~/.ansible-navigator.yml
-      when: ("'do374' in course_info['content'] | b64decode") or ("'rh294' in course_info['content'] | b64decode")
+      when: > 
+        'do374' in course_info['content'] | b64decode | join or
+        'rh294' in course_info['content'] | b64decode | join
       ansible.builtin.file:
         path: ~/.ansible-navigator.yml
         state: absent
