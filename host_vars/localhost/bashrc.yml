@@ -124,12 +124,12 @@ my_bashrc: |
 
   my_ocp (){
 
-    echo 'M=$RHT_OCP4_MASTER_API'
-    echo 'WC=$RHT_OCP4_WILDCARD_DOMAIN'
-    echo 'NS=$RHT_OCP4_NEXUS_SERVER'
-    echo 'U=$RHT_OCP4_DEV_USER'
-    echo 'P=$RHT_OCP4_DEV_PASSWORD'
-    echo 'G=$RHT_OCP4_GITHUB_USER'
-    echo 'Q=$RHT_OCP4_QUAY_USER'
+    echo 'M=$RHT_OCP4_MASTER_API' # api server
+    echo 'WC=$RHT_OCP4_WILDCARD_DOMAIN' # wildcard domain
+    echo 'NS=$RHT_OCP4_NEXUS_SERVER' # nexus server
+    echo 'U=$RHT_OCP4_DEV_USER' # developer user
+    echo 'P=$RHT_OCP4_DEV_PASSWORD' # developer password
+    echo 'G=$RHT_OCP4_GITHUB_USER' # your github account
+    echo 'Q=$RHT_OCP4_QUAY_USER' # your quay.io account
 
   }
