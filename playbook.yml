@@ -5,6 +5,16 @@
 
   tasks:
 
+    - name: Check if user is logged in via GUI
+      register: login_type
+      ansible.builtin.shell: "loginctl show-session $(loginctl --no-legend | awk '{print $1}') -p Type --value"
+
+    - name: Terminate playbook if user is not logged in via GUI
+      ansible.builtin.assert:
+        that: login_type.stdout == "x11"
+        fail_msg: |
+          This playbook must be run from a console session at https://rol.redhat.com
+
     - name: Determine course type
       register: course_info
       ansible.builtin.slurp:
