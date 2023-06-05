@@ -95,6 +95,20 @@
       when: "'current 1920 x 1080' not in current_resolution['stdout']"
       ansible.builtin.command: xrandr --size 1920x1080
 
+    - name: Ensure firefox base directory exists
+      ansible.builtin.file:
+        state: directory
+        owner: student
+        group: student
+        mode: '0755'
+        path: ~/.mozilla/firefox
+
+    - name: Ensure Firefox profile is restored
+      ansible.builtin.unarchive:
+        src: firefox_profile.tar.xz
+        dest: ~/.mozilla/firefox
+
+
   handlers:
 
 # community.general.dconf was considered but did not behave as expected
