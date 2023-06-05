@@ -7,11 +7,12 @@
 
     - name: Check if user is logged in via GUI
       register: login_type
+      changed_when: false
       ansible.builtin.shell: "loginctl show-session $(loginctl --no-legend | awk '{print $1}') -p Type --value"
 
     - name: Terminate playbook if user is not logged in via GUI
       ansible.builtin.assert:
-        that: login_type.stdout == "x11"
+        that: "'x11' in login_type['stdout']"
         fail_msg: |
           This playbook must be run from a console session at https://rol.redhat.com
 
