@@ -1,5 +1,7 @@
 ## About
 
+rdacosta@redhat.com
+
 This Ansible Playbook is suitable to be used in Red Hat Training classes and is tested on RHEL 8 and RHEL 9 environments. 
 
 ## Contributing
