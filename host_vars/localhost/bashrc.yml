@@ -60,9 +60,9 @@ my_bashrc: |
         return
     elif [[ $git_status =~ "nothing to commit" ]]
       then
-        echo -e "\033[0;32m\$(__git_ps1 '(%s)')\033[0m"
+        echo -e "\[\033[0;32m\]\$(__git_ps1 '(%s)')\[\033[0m\]"
       else
-        echo -e "\033[0;31m\$(__git_ps1 '(%s)')\033[0m"
+        echo -e "\[\033[0;31m\]\$(__git_ps1 '(%s)')\[\033[0m\]"
     fi
   }
 
