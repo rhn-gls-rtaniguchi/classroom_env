@@ -43,6 +43,9 @@ my_bashrc: |
   alias dl="oc login -u developer -p developer https://api.ocp4.example.com:6443"
   alias al="oc login -u admin -p redhatocp https://api.ocp4.example.com:6443"
 
+  # Set clustercheck alias for OCP classes
+  alias clustercheck="ssh lab@utility ./wait.sh"
+
   # ===============================
   # Git bash environment variables
   # ===============================
