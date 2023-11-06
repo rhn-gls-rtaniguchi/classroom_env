@@ -35,6 +35,13 @@ my_bashrc: |
       P=$RHT_OCP4_DEV_PASSWORD
       G=$RHT_OCP4_GITHUB_USER
       Q=$RHT_OCP4_QUAY_USER
+    else
+      # Still set the variables, but in a way that newer OCP classes can use them 
+      M=https://api.ocp4.example.com:6443
+      WC=apps.ocp4.example.com
+      NS=nexus.nexus-common.apps.ocp4.example.com
+      U=developer
+      P=developer
   fi
 
   # Set login aliases for OCP classes
@@ -149,7 +156,7 @@ my_bashrc: |
     echo 'NS=$RHT_OCP4_NEXUS_SERVER' # nexus server
     echo 'U=$RHT_OCP4_DEV_USER' # developer user
     echo 'P=$RHT_OCP4_DEV_PASSWORD' # developer password
-    echo 'G=$RHT_OCP4_GITHUB_USER' # your github account
-    echo 'Q=$RHT_OCP4_QUAY_USER' # your quay.io account
+    echo 'G=$RHT_OCP4_GITHUB_USER' # your github account (not for >= OCP4.12)
+    echo 'Q=$RHT_OCP4_QUAY_USER' # your quay.io account (not for >= OCP4.12)
 
   }
