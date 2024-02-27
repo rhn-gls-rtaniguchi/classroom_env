@@ -12,7 +12,7 @@
 
     - name: Terminate playbook if user is not logged in via GUI
       ansible.builtin.assert:
-        that: "'x11' in login_type['stdout']"
+        that: "'x11' in login_type['stdout'] or 'wayland' in login_type['stdout']"
         fail_msg: |
           This playbook must be run from a console session at https://rol.redhat.com
 
@@ -20,6 +20,9 @@
       register: course_info
       ansible.builtin.slurp:
         src: /etc/rht
+
+    - name: Ensure pip3 is installed with python 3.11
+      ansible.builtin.command: /usr/bin/python3.11 -m ensurepip
 
     - name: Ensure needed python packages are installed
       ansible.builtin.pip:
