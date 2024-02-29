@@ -22,7 +22,9 @@
         src: /etc/rht
 
     - name: Ensure pip3 is installed with python 3.11
-      ansible.builtin.command: /usr/bin/python3.11 -m ensurepip
+      register: pip3_output
+      ansible.builtin.command: /usr/bin/python3 -m ensurepip
+      changed_when: "'Requirement already satisfied' not in pip3_output['stdout']"
 
     - name: Ensure needed python packages are installed
       ansible.builtin.pip:
