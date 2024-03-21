@@ -21,11 +21,6 @@
       ansible.builtin.slurp:
         src: /etc/rht
 
-    - name: Ensure pip3 is installed with python 3.11
-      register: pip3_output
-      ansible.builtin.command: /usr/bin/python3 -m ensurepip
-      changed_when: "'Requirement already satisfied' not in pip3_output['stdout']"
-
     - name: Ensure needed python packages are installed
       ansible.builtin.pip:
         name: yamllint
@@ -40,7 +35,7 @@
 
     - name: Ensure pathogen is downloaded
       ansible.builtin.get_url:
-        url: https://tpo.pe/pathogen.vim
+        url: https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
         dest: ~/.vim/autoload/pathogen.vim
 
     - name: Ensure plugin repos are cloned
@@ -98,7 +93,7 @@
 
     - name: Ensure resolution is set
       when: "'current 1920 x 1080' not in current_resolution['stdout']"
-      ansible.builtin.command: xrandr --size 1920x1080
+      ansible.builtin.command: xrandr --size 1600x900
 
     - name: Ensure firefox base directory exists
       ansible.builtin.file:
