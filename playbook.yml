@@ -21,12 +21,6 @@
       ansible.builtin.slurp:
         src: /etc/rht
 
-    - name: Ensure needed python packages are installed
-      ansible.builtin.pip:
-        name: yamllint
-        state: present
-        extra_args: --user
-
     - name: Ensure needed directories are present
       loop: "{{ dir_list }}"
       ansible.builtin.file:
