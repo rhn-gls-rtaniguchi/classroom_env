@@ -80,7 +80,7 @@
         state: absent
     - name: Download google chrome
       ansible.builtin.get_url:
-        src: https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+        url: https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
         dest: /tmp/google-chrome.rpm
     - name: Manually install google chrome
       become: true
