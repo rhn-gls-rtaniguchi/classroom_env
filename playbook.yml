@@ -71,6 +71,12 @@
         minute: "0"
         hour: "17"
         job: ~/bin/upload_timings 
+    - name: Install google chrome repos
+      ansible.builtin.yum_repository:
+        enabled: true
+        baseurl: http://dl.google.com/linux/chrome/rpm/stable/$basearch
+        gpgcheck: true
+        gpgkey: https://dl-ssl.google.com/linux/linux_signing_key.pub
 #    - name: Remove chromium and firefox
       #become: true
       #ansible.builtin.dnf:
