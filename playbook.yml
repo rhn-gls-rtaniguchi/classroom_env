@@ -71,7 +71,17 @@
         minute: "0"
         hour: "17"
         job: ~/bin/upload_timings 
-
+    - name: Remove chromium and firefox
+      ansible.builtin.dnf:
+        name:
+          - firefox
+          - chromium
+        state: absent
+    - name: Manually install google chrome
+        ansible.builtin.dnf:
+          name: https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+          state: present
+      
 #    - name: Remove ~/.ansible-navigator.yml
 #      when: > 
         #'do374' in course_info['content'] | b64decode | join or
