@@ -78,10 +78,14 @@
           - firefox
           - chromium
         state: absent
+    - name: Download google chrome
+      ansible.builtin.get_url:
+        src: https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+        dest: /tmp/google-chrome.rpm
     - name: Manually install google chrome
       become: true
       ansible.builtin.dnf:
-        name: https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+        name: /tmp/google-chrome.rpm
         state: present
       
 #    - name: Remove ~/.ansible-navigator.yml
