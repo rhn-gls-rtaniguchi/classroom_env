@@ -89,7 +89,7 @@
       #  state: absent
     - name: Install google chrome
       ansible.builtin.yum:
-        url: google-chrome-stable
+        name: google-chrome-stable
         state: present
 
 #    - name: Remove ~/.ansible-navigator.yml
