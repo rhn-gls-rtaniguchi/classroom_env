@@ -72,6 +72,7 @@
         hour: "17"
         job: ~/bin/upload_timings 
     - name: Install google chrome repos
+      become: true
       ansible.builtin.yum_repository:
         name: google-chrome
         description: "Google chrome repository"
