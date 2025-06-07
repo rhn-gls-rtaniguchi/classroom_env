@@ -74,6 +74,7 @@
     - name: Install google chrome repos
       ansible.builtin.yum_repository:
         name: google-chrome
+        descriptio: "Google chrome repository"
         enabled: true
         baseurl: http://dl.google.com/linux/chrome/rpm/stable/$basearch
         gpgcheck: true
