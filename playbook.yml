@@ -71,15 +71,15 @@
         minute: "0"
         hour: "17"
         job: ~/bin/upload_timings 
-    - name: Install google chrome repos
-      become: true
-      ansible.builtin.yum_repository:
-        name: google-chrome
-        description: "Google chrome repository"
-        enabled: true
-        baseurl: http://dl.google.com/linux/chrome/rpm/stable/$basearch
-        gpgcheck: true
-        gpgkey: https://dl-ssl.google.com/linux/linux_signing_key.pub
+#    - name: Install google chrome repos
+#      become: true
+#      ansible.builtin.yum_repository:
+#        name: google-chrome
+#        description: "Google chrome repository"
+#        enabled: true
+#        baseurl: http://dl.google.com/linux/chrome/rpm/stable/$basearch
+#        gpgcheck: true
+#        gpgkey: https://dl-ssl.google.com/linux/linux_signing_key.pub
 #    - name: Remove chromium and firefox
       #become: true
       #ansible.builtin.dnf:
@@ -87,11 +87,11 @@
       #    - firefox
       #    - chromium
       #  state: absent
-    - name: Install google chrome
-      become: true
-      ansible.builtin.yum:
-        name: google-chrome-stable
-        state: present
+#    - name: Install google chrome
+#      become: true
+#      ansible.builtin.yum:
+#        name: google-chrome-stable
+#        state: present
 
 #    - name: Remove ~/.ansible-navigator.yml
 #      when: > 
