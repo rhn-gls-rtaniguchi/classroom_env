@@ -72,12 +72,14 @@
         hour: "17"
         job: ~/bin/upload_timings 
     - name: Remove chromium and firefox
+      become: true
       ansible.builtin.dnf:
         name:
           - firefox
           - chromium
         state: absent
     - name: Manually install google chrome
+      become: true
       ansible.builtin.dnf:
         name: https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
         state: present
