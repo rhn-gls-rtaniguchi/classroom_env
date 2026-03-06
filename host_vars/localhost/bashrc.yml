@@ -5,7 +5,7 @@ my_bashrc: |
   # ===============================
 
   # Set editor for oc commands
-  export EDITOR=/usr/bin/vim
+  export EDITOR=/usr/bin/gedit
 
   # Set bash history size
   export HISTSIZE=10000
